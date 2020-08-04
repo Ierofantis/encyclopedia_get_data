@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
   let data = "";
   function getBandsByGender(DisplayStart) {
 
-    while (DisplayStart < 1000) {
+    while (DisplayStart < 40000) {
       DisplayStart += 500;
 
       https.get('https://www.metal-archives.com/browse/ajax-genre/g/black/json/1?sEcho=1&iColumns=22&sColumns=&iDisplayStart=' + DisplayStart + '+iDisplayLength=1000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=22&iSortCol_0=0&sSortDir_0=asc&iSortingCols=1&bSortable_0=true&bSortable_1=true&bSortable_2=true&bSortable_3=false&_=1594226003148', (resp) => {
@@ -37,7 +37,7 @@ router.get('/transformToJson', function (req, res, next) {
   let arr = [];
   var fs = require('fs'),
     path = require('path'),
-    filePath = path.join(__dirname, 'bands.json');
+    filePath = path.join(__dirname, 'black_metal2.json');
 
   fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
 
