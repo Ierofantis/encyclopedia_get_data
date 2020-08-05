@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
 const https = require('https');
+const data = require('./bands2.json')
+var apicache = require("apicache");
+let cache = apicache.middleware
+
+router.get('/sendData', cache('5 minutes'), function (req, res) {
+  res.header("Content-Type", 'application/json');
+  res.send(JSON.stringify(data));
+})
 
 router.get('/', function (req, res, next) {
   let data = "";
