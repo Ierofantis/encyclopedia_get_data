@@ -4,10 +4,31 @@ const https = require('https');
 const data = require('./bands2.json')
 var apicache = require("apicache");
 let cache = apicache.middleware
+const { Request } = require("../model");
 
-router.get('/sendData', cache('5 minutes'), function (req, res) {
-  res.header("Content-Type", 'application/json');
-  res.send(JSON.stringify(data));
+
+router.post('/save', function (req, res) {
+
+
+  let json = require('../routes/bands2.json');
+
+  Request.insertMany(json, function (err, result) {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send("insertion finished")
+    }
+  });
+});
+
+router.get('/sendData', function (req, res) {
+  const band = req.query.band
+  // let reqBandOne = band.split(">")[1]
+  // let reqBandTwo = reqBandOne.split("<")[0]
+  Request.findOne({ title: band }, function (err, obj) { res.send(JSON.stringify(obj)); });
+
+  // res.header("Content-Type", 'application/json');
+  // res.send(data);
 })
 
 router.get('/', function (req, res, next) {
