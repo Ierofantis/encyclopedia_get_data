@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -11,11 +13,17 @@ var cors = require('cors')
 const mongoose = require("mongoose");
 
 //connect to mongodb
+
 mongoose
-  .connect(`mongodb://localhost:27017/data`, { useNewUrlParser: true })
+  .connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@ds235388.mlab.com:35388/archives`, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB..."))
   .catch(err => console.error("Could not connect to MongoDB..."));
 
+//localhost
+// mongoose
+// .connect(`mongodb://localhost:27017/data`, { useNewUrlParser: true })
+// .then(() => console.log("Connected to MongoDB..."))
+// .catch(err => console.error("Could not connect to MongoDB..."));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
