@@ -35,12 +35,9 @@ router.get('/autosearch/:key', (req, res) => {
 
 router.get('/sendData', function (req, res) {
   const band = req.query.band
-  // let reqBandOne = band.split(">")[1]
-  // let reqBandTwo = reqBandOne.split("<")[0]
+
   Request.findOne({ title: band }, function (err, response) { res.json(response); });
 
-  // res.header("Content-Type", 'application/json');
-  // res.send(data);
 })
 
 router.get('/', function (req, res, next) {
