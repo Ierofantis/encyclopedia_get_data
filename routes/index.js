@@ -21,11 +21,23 @@ router.post('/save', function (req, res) {
   });
 });
 
+router.get('/autosearch/:key', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  let q = req.params.key;
+  let query = {
+    "$or": [{ "title": { "$regex": q, "$options": "i" } }]
+  };
+  Request.find(query, 'title')
+    .sort({ date: -1 })
+    .limit(10)
+    .then(items => res.json(items));
+});
+
 router.get('/sendData', function (req, res) {
   const band = req.query.band
   // let reqBandOne = band.split(">")[1]
   // let reqBandTwo = reqBandOne.split("<")[0]
-  Request.findOne({ title: band }, function (err, obj) { res.send(JSON.stringify(obj)); });
+  Request.findOne({ title: band }, function (err, response) { res.json(response); });
 
   // res.header("Content-Type", 'application/json');
   // res.send(data);
