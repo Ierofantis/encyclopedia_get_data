@@ -6,3 +6,4 @@ Routes that:
 2) Normalize them 
 3) Save to Mongo
 4) Make queries for autocompletion
+
