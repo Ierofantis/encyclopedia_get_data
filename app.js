@@ -15,9 +15,9 @@ const mongoose = require("mongoose");
 //connect to mongodb
 
 mongoose
-  .connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@ds235388.mlab.com:35388/archives`, { useNewUrlParser: true })
+  .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.crpoi.mongodb.net/archives?retryWrites=true&w=majority`, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB..."))
-  .catch(err => console.error("Could not connect to MongoDB..."));
+  .catch(err => console.error("Could not connect to MongoDB...", err));
 
 //localhost
 // mongoose
